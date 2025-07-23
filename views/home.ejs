@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css">
     <link
       href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css"
       rel="stylesheet"
@@ -23,7 +24,7 @@
        class="pop  backdrop-blur fixed top-0 left-0 h-screen w-screen  flex-col items-center justify-center"
       >
       <form 
-        action="/upload-files" 
+        action="/upload" 
         method="post"
         enctype="multipart/form-data">
        
@@ -56,7 +57,7 @@
                   SVG, PNG, JPG or GIF (MAX. 800x400px)
                 </p>
               </div>
-              <input id="dropzone-file" type="file" class="hidden" />
+              <input id="dropzone-file" type="file" class="hidden"  name="file"/>
             </label>
           </div>
           <button type="submit"
@@ -67,7 +68,14 @@
         </form>
          <button onclick="hidePopup()">X</button>
         </div>
-
+        <div class="files flex flex-wrap  gap-4 m-4">
+          <%files.forEach((file)=>{ %>
+          <div class="p-4 bg-white border border-gray-200 cursor-pointer  rounded-md gap-4  flex justify-space-between">
+            <h1><%=file.originalName%></h1>
+            <a href="/download/<%=file.path%>" download="<%=file.originalName%>"><i class="fas fa-down-long"></i></a>
+          </div>
+          <% }) %>
+        </div>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
     <script>
